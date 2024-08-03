@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from backend import movieDescription, popularMovies
+from backend import movieDescription, popularMovies, similarMovieDict
 
 movieDf = pd.read_csv(r'C:\Users\Gurmeet\Documents\Python Projects\Movie Recommendation App'
                           r'\Movies Data\movie_pages.csv', sep=';')
@@ -29,7 +29,11 @@ if st.session_state:
             st.write(movieList[movieTitle])
             movieLink = movieDf.loc[movieDf['movie_title']==movieTitle]['link'].squeeze()
             st.write(f"Movie IMDB page:- {movieLink}")
-        st.write("Browse similar movies like this: ")
+        st.header("Similar movies like this: ")
+        similarMovies = similarMovieDict[movieTitle]
+        for movie in similarMovies:
+            st.subheader(movie)
+
 
 
 else:
