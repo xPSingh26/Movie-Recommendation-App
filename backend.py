@@ -121,8 +121,10 @@ similarity_matrix = linear_kernel(tfidf_matrix, tfidf_matrix)
 
 def movie_search(title, nr_of_movies=10):
     """returns similar movies to searched movie name"""
-    movie_index = movies[movies['title'] == title].index[0]
+    movie_index = movies[movies['title'] == title].index[0] # grab index of movie name
+    # grab list of similarity scores with movie indexes
     similarity_score = list(enumerate(similarity_matrix[movie_index]))
+    # sort the list with similarity score as the key
     similarity_score = sorted(similarity_score, key=lambda x: x[1], reverse=True)
     similarity_score = similarity_score[1:nr_of_movies+1]
     similarity_score_filtered = []
